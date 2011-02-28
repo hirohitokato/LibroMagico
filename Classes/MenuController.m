@@ -9,6 +9,53 @@
 #import "MenuController.h"
 #import "BookmarkCollector.h"
 #import "Bookmark.h"
+#import <WebKit/WebKit.h>
+
+@interface AppController : NSObject
+{
+}
+- (void)openURL:(id)arg1 forcingHTMLMIMEType:(BOOL)arg2;
+@end
+
+@interface BrowserDocumentController : NSDocumentController
+{
+}
++ (id)sharedDocumentController;
+- (id)frontmostBrowserDocument;
+- (void)openLocation:(id)arg1;
+@end
+
+@interface WindowController : NSWindowController
+{
+}
+@end
+
+@interface BrowserWindowController : WindowController
+{
+}
+- (id)currentBrowserWebView;
+@end
+
+@interface WebViewPlus : WebView
+{
+}
+@end
+
+@interface SearchableWebView : WebViewPlus
+{
+}
+@end
+
+@interface BrowserContentWebView : SearchableWebView
+{
+}
+@end
+
+@interface BrowserWebView : BrowserContentWebView
+{
+}
+- (id)stringByEvaluatingJavaScriptFromString:(id)arg1;
+@end
 
 @interface MenuController (private)
 - (void)selected:(id)sender;
@@ -54,7 +101,23 @@
 
 - (void)selected:(NSMenuItem *)sender {
 	Bookmark *b = [[BookmarkCollector sharedInstance] bookmarkAtIndex:sender.tag];
-	[[NSApplication sharedApplication].delegate openURL:b.url
-									forcingHTMLMIMEType:NO];
+
+	// http, https
+	NSRange range = [b.urlString rangeOfString:@"http"];
+	if (range.location==0) {
+		[(AppController *)[NSApplication sharedApplication].delegate
+		 openURL:[NSURL URLWithString:b.urlString] forcingHTMLMIMEType:YES];
+		return;
+	}
+
+	// javascript
+	range = [b.urlString rangeOfString:@"javascript:"];
+	if (range.location==0) {
+		Class BrowserDocumentController = objc_getClass ("BrowserDocumentController");
+		id browserController = [BrowserDocumentController sharedDocumentController];
+		[[[browserController frontmostBrowserDocument] currentBrowserWebView]
+		 stringByEvaluatingJavaScriptFromString:b.urlString];
+		return;
+	}
 }
 @end

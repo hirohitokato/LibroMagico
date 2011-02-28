@@ -14,7 +14,7 @@ Let's check "marklets":http://marklets.com/ .
 h2. Installing LibroMagico
 
 # Install "SIMBL":http://www.culater.net/software/SIMBL/SIMBL.php
-# Put LibroMagico.bundle into ~/Library/Application Support/SIMBL/Plugins folder
+# Put LibroMagico.bundle into @~/Library/Application Support/SIMBL/Plugins@ folder
 # Relaunch a Safari
 
 h2. Usage
