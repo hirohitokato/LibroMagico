@@ -15,7 +15,7 @@ h2. Installing LibroMagico
 
 # Install "SIMBL":http://www.culater.net/software/SIMBL/SIMBL.php
 # Put LibroMagico.bundle into @~/Library/Application Support/SIMBL/Plugins@ folder
-** You can download the zip file from "http://cielo.rojo.jp/files/LibroMagico.zip":http://cielo.rojo.jp/files/LibroMagico.zip .
+** You can download the file from "http://cielo.rojo.jp/files/LibroMagico.zip":http://cielo.rojo.jp/files/LibroMagico.zip .
 # Relaunch a Safari
 
 h2. Usage
