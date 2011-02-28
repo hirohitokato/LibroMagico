@@ -7,12 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Bookmark.h"
 
 #define BookmarkCollector ComKatokichiSoftBookmarkCollector
 
 @interface BookmarkCollector : NSObject {
+	NSArray *_cache;
 }
 
 + (id)sharedInstance;
 - (NSArray *)currentBookmarks;
+- (Bookmark *)bookmarkAtIndex:(NSInteger)index;
+
 @end

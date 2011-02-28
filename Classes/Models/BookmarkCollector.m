@@ -7,11 +7,10 @@
 //
 
 #import "BookmarkCollector.h"
-#import "Bookmark.h"
 
 @interface BookmarkCollector (private)
 - (NSString *)bookmarkFilePath;
-- (NSDictionary *)dictionaryForBookmarklets:(NSDictionary *)bookmarks;
+- (NSDictionary *)dictionaryForTitle:(NSString *)title type:(NSString *)type parentDict:(NSDictionary *)dictionary;
 - (void)recursiveReadBookmarksDict:(NSDictionary *)bookmark result:(NSMutableArray *)array;
 @end
 
@@ -34,34 +33,61 @@
 
 - (id)init {
 	if ((self=[super init])) {
+		_cache = nil;
 	}
 	return self;
 }
 
+- (void)dealloc {
+	[_cache release];
+	[super dealloc];
+}
+
 #pragma mark -
 - (NSArray *)currentBookmarks {
-	NSDictionary *bookmarks = [NSDictionary dictionaryWithContentsOfFile:[self bookmarkFilePath]];
+
+	NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
 
 	// Read bookmarks
-	NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
-	NSDictionary *bookmarklets = [self dictionaryForBookmarklets:bookmarks];
+	NSDictionary *bookmarks = [NSDictionary dictionaryWithContentsOfFile:[self bookmarkFilePath]];
+	NSDictionary *bookmarkBar = [self dictionaryForTitle:@"BookmarksBar"
+													type:@"WebBookmarkTypeList"
+											  parentDict:bookmarks];
+	NSDictionary *bookmarklets = [self dictionaryForTitle:@"Bookmarklets"
+													 type:@"WebBookmarkTypeList"
+											   parentDict:bookmarkBar];
 	[self recursiveReadBookmarksDict:bookmarklets result:array];
+
+	// Update cache
+	[array retain];
+	[_cache release];
+	_cache = array;
 
 	return array;
 }
 
-- (NSDictionary *)dictionaryForBookmarklets:(NSDictionary *)bookmarks {
+- (Bookmark *)bookmarkAtIndex:(NSInteger)index {
+	if (!_cache) {
+		[self currentBookmarks];
+	}
+	return [_cache objectAtIndex:index];
+}
+
+- (NSDictionary *)dictionaryForTitle:(NSString *)title
+								type:(NSString *)type
+						  parentDict:(NSDictionary *)dictionary {
 	// Search "Bookmarklets" directory in Boomark Bar
-	NSArray* children = [bookmarks objectForKey:@"Children"];
+	NSArray* children = [dictionary objectForKey:@"Children"];
 	if (!children)
 		return nil;
 
 	for (NSDictionary* e in children) {
-		NSString* type = [e objectForKey:@"WebBookmarkType"];
-		NSString* title = [e objectForKey:@"Title"];
+		NSString* childtype = [e objectForKey:@"WebBookmarkType"];
+		NSString* childtitle = [e objectForKey:@"Title"];
 		
-		if ([type isEqualToString:@"WebBookmarkTypeList"] && [title isEqualToString:@"Title"])
-			return e;
+		if ([childtype isEqualToString:type] && [childtitle isEqualToString:title]) {
+				return e;
+		}
 	}
 	return nil;
 }
