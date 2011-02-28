@@ -9,7 +9,7 @@ This is a Safari version of Takayuki Fukatsu's SpellBook.
 He says:
 _Bookmarklet is like a magic spell, collect them and build your own SpellBook!_
 
-I think so. Let's check "marklets":http://marklets.com/
+Let's check "marklets":http://marklets.com/ .
 
 h2. Installing LibroMagico
 
@@ -20,9 +20,9 @@ h2. Installing LibroMagico
 h2. Usage
 
 # Put your bookmarklets into 'Bookmarklets' folder.
-** Bookmarklets must be in *Bookmark bar*.
+** *Bookmarklets folder must be in Bookmark Bar*.
 # You can execute them from right click.
 
 h2. Special Thanks
-* Takayuki Fukatsu (a.k.a. @fladdict) http://artandmobile.com/
-* moyashi (a.k.a. @hitoriblog) http://hitoriblog.com/
+* Takayuki Fukatsu (a.k.a. @fladdict) "his site":http://artandmobile.com/
+* moyashi (a.k.a. @hitoriblog) "his site":http://hitoriblog.com/
