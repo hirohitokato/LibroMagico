@@ -113,7 +113,7 @@
 			if (!urlStr || !title)
 				continue;
 			
-			Bookmark *b = [[[Bookmark alloc] initWithTitle:title url:[NSURL URLWithString:urlStr]]
+			Bookmark *b = [[[Bookmark alloc] initWithTitle:title url:urlStr]
 						   autorelease];
 			[array insertObject:b atIndex:[array count]];
 		}

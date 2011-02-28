@@ -11,11 +11,11 @@
 #define Bookmark ComKatokichiSoftBookmark
 @interface Bookmark : NSObject {
 	NSString *_title;
-	NSURL *_url;
+	NSString *_urlString;
 }
 
--(id)initWithTitle:(NSString *)title url:(NSURL *)url;
+-(id)initWithTitle:(NSString *)title url:(NSString *)url;
 
 @property (nonatomic, retain)NSString *title;
-@property (nonatomic, retain)NSURL *url;
+@property (nonatomic, retain)NSString *urlString;
 @end
