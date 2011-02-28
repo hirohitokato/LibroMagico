@@ -1,0 +1,23 @@
+h1. LibroMagico
+Execute bookmarklets from right click.
+
+This is a Safari version of Takayuki Fukatsu's SpellBook.
+https://chrome.google.com/extensions/detail/ihckioenbbjedpocnnennnehjaacojil
+
+He says:
+bq. Bookmarklet is like a magic spell, collect them and build your own SpellBook!
+
+h2. Installing LibroMagico
+
+# Install SIMBL( http://www.culater.net/software/SIMBL/SIMBL.php )
+# Put LibroMagico.bundle into ~/Library/Application Support/SIMBL/Plugins folder
+# Relaunch a Safari
+
+h2. Usage
+
+# Put your bookmarklets into 'Bookmarklets' folder.
+# You can execute them from right click.
+
+h2. Special Thanks
+* Takayuki Fukatsu (a.k.a. @fladdict) http://artandmobile.com/
+* moyashi (a.k.a. @hitoriblog) http://hitoriblog.com/
