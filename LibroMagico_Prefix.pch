@@ -1,0 +1,33 @@
+//
+// Prefix header for all source files of the 'SafariBookmark' target in the 'SafariBookmark' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+
+// 一般的なログ出力
+#define KSLogMethod	NSLog(@"<%s/%d>", __PRETTY_FUNCTION__, __LINE__);
+#define KSLog(fmt, ...) \
+NSLog((@"<%s/%d> " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+// エラー出力
+#define KSWarning(fmt, ...) \
+NSLog((@"<%s/%d> [WARNING]" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+// エラー出力
+#define KSError(fmt, ...) \
+NSLog((@"<%s/%d> [ERROR]" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+// CGRect型のログ情報出力
+#define KSLogPoint(p)	NSLog(@"{%f,%f}", p.x, p.y);
+#define KSLogSize(p)	NSLog(@"{%f,%f}", p.width, p.height);
+#define KSLogRect(p)	NSLog(@"{{%f,%f}/{%f,%f}}", p.origin.x, p.origin.y, p.size.width, p.size.height);
+#define KSLog_CGRect(/* NSString* */text, /* CGRect */rect)				\
+do {																\
+NSLog(@"<%s/%d> CGRect(%@) = {x:%.2f, y:%.2f, w:%.2f, h:%.2f}", \
+__PRETTY_FUNCTION__, __LINE__,								\
+(text), (rect).origin.x, (rect).origin.y,					\
+(rect).size.width, (rect).size.height);						\
+} while(0);
+
+#endif
