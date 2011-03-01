@@ -24,16 +24,13 @@
 - (void)openLocation:(id)arg1;
 @end
 
-@interface WindowController : NSWindowController
+@interface BrowserDocument : NSDocument
 {
 }
-@end
-
-@interface BrowserWindowController : WindowController
-{
-}
+- (id)evaluateJavaScript:(id)arg1;
 - (id)currentBrowserWebView;
 @end
+
 
 @interface WebViewPlus : WebView
 {
@@ -104,7 +101,6 @@
 	// http, https
 	NSRange range = [b.urlString rangeOfString:@"http"];
 	if (range.location==0) {
-		NSLog(@"http is called.");
 		[(AppController *)[NSApplication sharedApplication].delegate
 		 openURL:[NSURL URLWithString:b.urlString] forcingHTMLMIMEType:YES];
 		return;
@@ -113,11 +109,12 @@
 	// javascript
 	range = [b.urlString rangeOfString:@"javascript:"];
 	if (range.location==0) {
-		NSLog(@"Javascript is called.");
 		Class BrowserDocumentController = objc_getClass ("BrowserDocumentController");
 		id browserController = [BrowserDocumentController sharedDocumentController];
-		[[[browserController frontmostBrowserDocument] currentBrowserWebView]
-		 stringByEvaluatingJavaScriptFromString:b.urlString];
+		BrowserDocument *browserDocument = [browserController frontmostBrowserDocument];
+		[browserDocument evaluateJavaScript:b.urlString];
+		//BrowserWebView *browserWebView = [browserDocument currentBrowserWebView];
+		//[browserWebView stringByEvaluatingJavaScriptFromString:b.urlString];
 		return;
 	}
 }
