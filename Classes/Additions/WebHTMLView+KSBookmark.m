@@ -1,6 +1,5 @@
 //
 //  WebHTMLView+KSBookmark.m
-//  SafariBookmark
 //
 //  Add special item to context menu.
 //

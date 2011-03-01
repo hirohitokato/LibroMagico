@@ -1,6 +1,5 @@
 //
 //  MenuController.m
-//  SafariBookmark
 //
 //  Created by KatokichiSoft on 11/02/28.
 //  Copyright 2011 KatokichiSoft. All rights reserved.
@@ -105,6 +104,7 @@
 	// http, https
 	NSRange range = [b.urlString rangeOfString:@"http"];
 	if (range.location==0) {
+		NSLog(@"http is called.");
 		[(AppController *)[NSApplication sharedApplication].delegate
 		 openURL:[NSURL URLWithString:b.urlString] forcingHTMLMIMEType:YES];
 		return;
@@ -113,6 +113,7 @@
 	// javascript
 	range = [b.urlString rangeOfString:@"javascript:"];
 	if (range.location==0) {
+		NSLog(@"Javascript is called.");
 		Class BrowserDocumentController = objc_getClass ("BrowserDocumentController");
 		id browserController = [BrowserDocumentController sharedDocumentController];
 		[[[browserController frontmostBrowserDocument] currentBrowserWebView]

@@ -1,6 +1,5 @@
 //
 //  Bookmark.m
-//  SafariBookmark
 //
 //  Created by KatokichiSoft on 11/02/28.
 //  Copyright 2011 KatokichiSoft. All rights reserved.

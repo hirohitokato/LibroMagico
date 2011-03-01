@@ -56,7 +56,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		089C166AFE841209C02AAC07 /* SafariBookmark */ = {
+		089C166AFE841209C02AAC07 /* LibroMagico */ = {
 			isa = PBXGroup;
 			children = (
 				9102F461131BDD520060C263 /* README.textile */,
@@ -67,7 +67,7 @@
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 				9152527A131C0B0E00D75F19 /* LICENSE.txt */,
 			);
-			name = SafariBookmark;
+			name = LibroMagico;
 			sourceTree = "<group>";
 		};
 		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
@@ -168,6 +168,7 @@
 				8D5B49AF048680CD000E48DA /* Resources */,
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
+				1AEFC47D131C93E60006C671 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -175,7 +176,7 @@
 			);
 			name = LibroMagico;
 			productInstallPath = "$(HOME)/Library/Bundles";
-			productName = SafariBookmark;
+			productName = LibroMagico;
 			productReference = 8D5B49B6048680CD000E48DA /* LibroMagico.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -194,7 +195,7 @@
 				French,
 				German,
 			);
-			mainGroup = 089C166AFE841209C02AAC07 /* SafariBookmark */;
+			mainGroup = 089C166AFE841209C02AAC07 /* LibroMagico */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -215,6 +216,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AEFC47D131C93E60006C671 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# clean up any previous products/symbolic links in the SIMBL Plugins folder\nif [ -a \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\" ]; then\n  rm -Rf \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\"\nfi\n\n# Depending on the build configuration, either copy or link to the most recent product\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n  # if we're debugging, add a symbolic link to the plug-in\n  ln -sf \"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\" \\\n    \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\"\nelif [ \"${CONFIGURATION}\" == \"Release\" ]; then\n  # if we're compiling for release, just copy the plugin to the SIMBL Plugins folder\n  cp -Rfv \"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\" \\\n    \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D5B49B1048680CD000E48DA /* Sources */ = {
