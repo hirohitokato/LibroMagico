@@ -33,21 +33,48 @@
 - (id)init {
 	if ((self=[super init])) {
 		_cache = nil;
+		_lastModifiedDate = nil;
 	}
 	return self;
 }
 
 - (void)dealloc {
 	[_cache release];
+	[_lastModifiedDate release];
 	[super dealloc];
 }
 
 #pragma mark -
-- (NSArray *)currentBookmarks {
+- (BOOL)shouldReloadFilePath:(NSString *)path {
 
-	NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+	// If modification date is not changed, keep using a current cache
+	NSDate *modificationDate;
+	NSDictionary *attributes = [[NSFileManager defaultManager]
+								attributesOfItemAtPath:[self bookmarkFilePath]
+								error:nil];
+	modificationDate = [attributes objectForKey:NSFileModificationDate];
+	if ([modificationDate isEqualToDate:_lastModifiedDate]) {
+		// Do nothing
+		return NO;
+	} else {
+		// Update cache and indicate the needs.
+		[modificationDate retain];
+		[_lastModifiedDate release];
+		_lastModifiedDate = modificationDate;
+		return YES;
+	}
+
+}
+- (NSArray *)currentBookmarks {
+	NSString *aPath = [self bookmarkFilePath];
+	
+	// Check whether I should reload the file.
+	if (![self shouldReloadFilePath:aPath]) {
+		return _cache;
+	}
 
 	// Read bookmarks
+	NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
 	NSDictionary *bookmarks = [NSDictionary dictionaryWithContentsOfFile:[self bookmarkFilePath]];
 	NSDictionary *bookmarkBar = [self dictionaryForTitle:@"BookmarksBar"
 													type:@"WebBookmarkTypeList"

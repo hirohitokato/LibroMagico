@@ -12,6 +12,7 @@
 
 @interface BookmarkCollector : NSObject {
 	NSArray *_cache;
+	NSDate *_lastModifiedDate;
 }
 
 + (id)sharedInstance;
