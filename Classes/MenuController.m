@@ -109,12 +109,18 @@
 	// javascript
 	range = [b.urlString rangeOfString:@"javascript:"];
 	if (range.location==0) {
+		// remove "javascript:" prefix and un-escape.
+		NSMutableString *js_escaped = [NSMutableString stringWithString:b.urlString];
+		[js_escaped deleteCharactersInRange:range];
+		NSString *js = [js_escaped stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		
 		Class BrowserDocumentController = objc_getClass ("BrowserDocumentController");
 		id browserController = [BrowserDocumentController sharedDocumentController];
 		BrowserDocument *browserDocument = [browserController frontmostBrowserDocument];
-		[browserDocument evaluateJavaScript:b.urlString];
-		//BrowserWebView *browserWebView = [browserDocument currentBrowserWebView];
-		//[browserWebView stringByEvaluatingJavaScriptFromString:b.urlString];
+
+		// eval!
+		[browserDocument evaluateJavaScript:js];
+
 		return;
 	}
 }
