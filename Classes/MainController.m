@@ -24,4 +24,23 @@
     Method alt = class_getInstanceMethod(theClass, otherSelector);
     method_exchangeImplementations(orig, alt);
 }
+
++ (NSImage *)preloadImage:(NSString *)name {
+	NSString * imagePath = [[NSBundle bundleWithIdentifier:LIBROMAGICO_BUNDLE_ID] pathForImageResource:name];
+	if (imagePath == nil) {
+		NSLog(@"imagePath for %@ is nil", name);
+		return nil;
+	}
+	NSLog(@"imagePath : %@", imagePath);
+	
+	NSImage * image = [[NSImage alloc] initByReferencingFile:imagePath];
+	if (image == nil) {
+		NSLog(@"image for %@ is nil", name);
+		return nil;
+	}
+	
+	[image setName:name];
+	return image;
+}
+
 @end

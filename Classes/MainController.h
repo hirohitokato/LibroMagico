@@ -11,9 +11,13 @@
 
 #define MainController ComKatokichiSoftMainController
 
+#define LIBROMAGICO_BUNDLE_ID @"com.KatokichiSoft.LibroMagico.bundle"
+
 @interface MainController : NSObject {
 
 }
+
++ (NSImage *)preloadImage:(NSString *)name;
 
 + (void)swizzleInstanceMethod:(SEL)aMethod
                    withMethod:(SEL)otherMethod

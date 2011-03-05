@@ -6,6 +6,8 @@
 //
 
 #import "MenuController.h"
+#import "MainController.h"
+
 #import "BookmarkCollector.h"
 #import "Bookmark.h"
 #import <WebKit/WebKit.h>
@@ -89,7 +91,13 @@
 	}
 
 	NSMenuItem *submenuItem = [[[NSMenuItem alloc] init] autorelease];
-	[submenuItem setTitle:@"Bookmarklets"];
+	[submenuItem setTitle:@"LibroMagico"];
+	NSImage *image = [NSImage imageNamed:@"libromagico"];
+	if (!image) {
+		image = [MainController preloadImage:@"libromagico"];
+	}
+	
+	[submenuItem setImage:image];
 	[submenuItem setSubmenu:submenu];
 	[menu insertItem:[NSMenuItem separatorItem] atIndex:insertPoint];
 	[menu insertItem:submenuItem atIndex:insertPoint+1];

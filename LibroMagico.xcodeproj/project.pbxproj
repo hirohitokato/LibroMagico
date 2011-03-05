@@ -17,6 +17,7 @@
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		9102F462131BDD520060C263 /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 9102F461131BDD520060C263 /* README.textile */; };
 		9152527B131C0B0E00D75F19 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9152527A131C0B0E00D75F19 /* LICENSE.txt */; };
+		91A165CE13227ED40034D0F4 /* libromagico.gif in Resources */ = {isa = PBXBuildFile; fileRef = 91A165CD13227ED40034D0F4 /* libromagico.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9102F461131BDD520060C263 /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
 		9152527A131C0B0E00D75F19 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		91A165CD13227ED40034D0F4 /* libromagico.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = libromagico.gif; path = Resources/libromagico.gif; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +84,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				91A165CD13227ED40034D0F4 /* libromagico.gif */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -212,6 +215,7 @@
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				9102F462131BDD520060C263 /* README.textile in Resources */,
 				9152527B131C0B0E00D75F19 /* LICENSE.txt in Resources */,
+				91A165CE13227ED40034D0F4 /* libromagico.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
